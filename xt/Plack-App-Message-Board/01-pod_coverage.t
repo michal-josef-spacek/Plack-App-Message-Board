@@ -5,4 +5,4 @@ use Test::NoWarnings;
 use Test::Pod::Coverage 'tests' => 2;
 
 # Test.
-pod_coverage_ok('Plack::App::MessageBoard', 'Plack::App::MessageBoard is covered.');
+pod_coverage_ok('Plack::App::Message::Board', 'Plack::App::Message::Board is covered.');

@@ -7,8 +7,8 @@ use Test::NoWarnings;
 BEGIN {
 
 	# Test.
-	use_ok('Plack::App::MessageBoard');
+	use_ok('Plack::App::Message::Board');
 }
 
 # Test.
-require_ok('Plack::App::MessageBoard');
+require_ok('Plack::App::Message::Board');

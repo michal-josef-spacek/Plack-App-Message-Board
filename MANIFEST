@@ -1,3 +1,7 @@
+Board.pm
+Board/List.pm
+Board/Message.pm
+Board/Utils.pm
 Changes
 CONCEPT
 inc/Module/Install.pm
@@ -14,10 +18,9 @@ inc/Module/Install/WriteAll.pm
 LICENSE
 Makefile.PL
 MANIFEST			This list of files
-MessageBoard.pm
 META.yml
 README
-t/Plack-App-MessageBoard/01-use.t
-t/Plack-App-MessageBoard/02-version.t
-xt/Plack-App-MessageBoard/01-pod_coverage.t
-xt/Plack-App-MessageBoard/02-pod.t
+t/Plack-App-Message-Board/01-use.t
+t/Plack-App-Message-Board/02-version.t
+xt/Plack-App-Message-Board/01-pod_coverage.t
+xt/Plack-App-Message-Board/02-pod.t
