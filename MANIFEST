@@ -33,6 +33,7 @@ t/Plack-App-Message-Board-Utils/02-version.t
 t/Plack-App-Message-Board-Utils/03-add_message.t
 t/Plack-App-Message-Board/01-use.t
 t/Plack-App-Message-Board/02-version.t
+t/Plack-App-Message-Board/03-new.t
 xt/Plack-App-Message-Board-List/01-pod_coverage.t
 xt/Plack-App-Message-Board-List/02-pod.t
 xt/Plack-App-Message-Board-Message/01-pod_coverage.t
