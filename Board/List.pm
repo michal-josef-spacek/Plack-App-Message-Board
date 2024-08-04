@@ -46,6 +46,7 @@ sub _css {
 	$self->{'css'}->put(
 		['s', '#main'],
 		['d', 'margin', '1em'],
+		['d', 'font-family', 'Arial, Helvetica, sans-serif'],
 		['e'],
 
 		['s', '.links'],
