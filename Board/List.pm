@@ -44,6 +44,10 @@ sub _css {
 	$self->{'_tags_table'}->process_css;
 
 	$self->{'css'}->put(
+		['s', '#main'],
+		['d', 'margin', '1em'],
+		['e'],
+
 		['s', '.links'],
 		['d', 'margin-bottom', '1em'],
 		['e'],
