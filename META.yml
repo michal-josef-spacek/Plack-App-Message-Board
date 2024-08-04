@@ -24,19 +24,24 @@ no_index:
 requires:
   Data::HTML::Element::A: 0
   Data::HTML::Footer: 0
+  Data::Message::Board: 0
+  Data::Message::Board::Comment: 0
   Data::Message::Simple: 0
+  DateTime: 0
   Exporter: 0
   Plack::App::CPAN::Changes: 0
   Plack::App::URLMap: 0
   Plack::Component: 0
   Plack::Component::Tags::HTML: 0.15
   Plack::Request: 0
+  Plack::Response: 0
   Plack::Session: 0
   Plack::Util::Accessor: 0
   Readonly: 0
   Tags::HTML::Container: 0
   Tags::HTML::Footer: 0
   Tags::HTML::Message::Board: 0
+  Tags::HTML::Message::Board::Blank: 0.02
   Tags::HTML::Messages: 0
   Tags::HTML::Table::View: 0
   Unicode::UTF8: 0

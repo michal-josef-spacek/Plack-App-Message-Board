@@ -4,15 +4,21 @@ use base qw(Plack::Component::Tags::HTML);
 use strict;
 use warnings;
 
+use Data::Message::Board;
+use Data::Message::Board::Comment;
+use DateTime;
 use Plack::App::Message::Board::Utils qw(add_message);
 use Plack::Request;
+use Plack::Response;
 use Plack::Session;
-use Plack::Util::Accessor qw(data footer lang);
+use Plack::Util::Accessor qw(add_comment_cb add_message_board_cb app_author footer lang
+	message_board_cb redirect_message_board_save);
 use Readonly;
 use Tags::HTML::Container;
 use Tags::HTML::Footer;
 use Tags::HTML::Messages;
 use Tags::HTML::Message::Board;
+use Tags::HTML::Message::Board::Blank;
 
 our $VERSION = 0.01;
 
@@ -23,6 +29,9 @@ sub _cleanup {
 	$self->{'_tags_footer'}->cleanup;
 	$self->{'_tags_messages'}->cleanup;
 	$self->{'_tags_message_board'}->cleanup;
+	$self->{'_tags_message_board_blank'}->cleanup;
+
+	delete $self->{'_blank'};
 
 	return;
 }
@@ -37,6 +46,7 @@ sub _css {
 		'info' => 'green',
 	});
 	$self->{'_tags_message_board'}->process_css;
+	$self->{'_tags_message_board_blank'}->process_css;
 
 	return;
 }
@@ -72,6 +82,7 @@ sub _prepare_app {
 		'vert_align' => 'top',
 	);
 	$self->{'_tags_message_board'} = Tags::HTML::Message::Board->new(%p);
+	$self->{'_tags_message_board_blank'} = Tags::HTML::Message::Board::Blank->new(%p);
 	$self->{'_tags_messages'} = Tags::HTML::Messages->new(%p,
 		'flag_no_messages' => 0,
 	);
@@ -85,23 +96,86 @@ sub _process_actions {
 
 	my $req = Plack::Request->new($env);
 
-	# TODO Process form.
-
-	# Get mesaage board.
+	# Message board id.
 	my $id = $req->parameters->{'id'};
-	if (defined $id) {
-		my ($message_board) = grep { $_->id eq $id } @{$self->data};
-		if (! defined $message_board) {
+
+	# Process form.
+	my $action = $req->parameters->{'action'};
+	if (defined $action && $action eq 'add_message_board') {
+		if (defined $self->add_message_board_cb) {
+			my $message_board_message = $req->parameters->{'message_board_message'};
+			$id = $self->add_message_board_cb->($self, Data::Message::Board->new(
+				'author' => $self->app_author,
+				'date' => DateTime->now,
+				'message' => $message_board_message,
+			));
+			if (defined $self->redirect_message_board_save) {
+				my $res = Plack::Response->new;
+				my $redirect_message_board_save = $self->redirect_message_board_save;
+				$res->redirect(sprintf $redirect_message_board_save, $id);
+				$self->psgi_app($res->finalize);
+			}
+		} else {
 			add_message(
 				$self,
 				$env,
 				'error',
-				'Cannot found message board.',
+				'No callback for message board adding.',
 			);
+		}
+	} elsif (defined $action && $action eq 'add_message_board_comment') {
+		my $message_board_comment_message = $req->parameters->{'message_board_comment_message'};
+		if (defined $message_board_comment_message) {
+			if (defined $self->add_comment_cb) {
+				$self->add_comment_cb->($self, $id, Data::Message::Board::Comment->new(
+					'author' => $self->app_author,
+					'date' => DateTime->now,
+					'message' => $message_board_comment_message,
+				));
+			} else {
+				add_message(
+					$self,
+					$env,
+					'error',
+					'No callback for message board comment adding.',
+				);
+			}
 		} else {
-			$self->{'_tags_message_board'}->init($message_board);
+			add_message(
+				$self,
+				$env,
+				'error',
+				'No comment message.',
+			);
 		}
 	}
+
+	# Fetch mesaage board.
+	$self->{'_blank'} = 1;
+	if (defined $id) {
+		if (! defined $self->message_board_cb) {
+			add_message(
+				$self,
+				$env,
+				'error',
+				'No callback for fetch message board.',
+			);
+		} else {
+			my $message_board = $self->message_board_cb->($self, $id);
+			if (! defined $message_board) {
+				add_message(
+					$self,
+					$env,
+					'error',
+					'Cannot found message board.',
+				);
+			} else {
+				$self->{'_tags_message_board'}->init($message_board);
+				$self->{'_blank'} = 0;
+			}
+		}
+	}
+
 
 	$self->{'_tags_footer'}->init($self->footer);
 
@@ -129,7 +203,11 @@ sub _tags_middle {
 		['b', 'div'],
 		['a', 'id', 'main'],
 	);
-	$self->{'_tags_message_board'}->process;
+	if ($self->{'_blank'}) {
+		$self->{'_tags_message_board_blank'}->process;
+	} else {
+		$self->{'_tags_message_board'}->process;
+	}
 	$self->{'tags'}->put(
 		['e', 'div'],
 	);

@@ -7,7 +7,7 @@ use warnings;
 use Data::HTML::Element::A;
 use Plack::Request;
 use Plack::Session;
-use Plack::Util::Accessor qw(data footer lang);
+use Plack::Util::Accessor qw(footer lang message_boards);
 use Readonly;
 use Tags::HTML::Container;
 use Tags::HTML::Footer;
@@ -98,8 +98,8 @@ sub _process_actions {
 		'Message',
 		'Number of comments',
 	];
-	if (defined $self->data) {
-		foreach my $mb (@{$self->data}) {
+	if (defined $self->message_boards) {
+		foreach my $mb (@{$self->message_boards}) {
 			push @{$self->{'_table_data'}}, [
 				Data::HTML::Element::A->new(
 					'data' => [$mb->id],
