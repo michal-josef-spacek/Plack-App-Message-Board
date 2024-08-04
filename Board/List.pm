@@ -15,7 +15,7 @@ use Tags::HTML::Footer;
 use Tags::HTML::Messages;
 use Tags::HTML::Table::View;
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 sub _cleanup {
 	my ($self, $env) = @_;
