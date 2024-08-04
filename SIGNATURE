@@ -1,0 +1,74 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.88.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+SHA256 ed226bb8ca8f5880bb1cc8affc23527fd88e513457eeb32ac38b476920910bf7 Board.pm
+SHA256 e824c92669b51af9b4d07d4c9a77da7cc1541e41fea59a4e34ec16f18744e788 Board/List.pm
+SHA256 4c5a619fb1109fb1ddecacabccf8974e980674c5a206630213bd10c9de191c95 Board/Message.pm
+SHA256 0bd93c43e4886e8dcb6326d940e98868616f248036a714993f044e082b117e06 Board/Utils.pm
+SHA256 b8912b13293def0a4ed16d7ff6dbf4a704d0b942d84438d6b56c7a5c2b489a6c CONCEPT
+SHA256 9a16ee2f3f8332a52a10ff9ae522dfeb4404a1dce079e9402bd79c1247617216 Changes
+SHA256 e9721661dbfb60dadebf3cd197cbc00239895aa73fb3431e19490cfad301cf99 LICENSE
+SHA256 a685e28f8ba217173685a8c52b640315b2099b7dc6e3407dc2c7124892f617d4 MANIFEST
+SHA256 0c7215c38ef0fa1603d45f19089143146c7211b0a5e6f6af4835d0c9aa4cf5df META.yml
+SHA256 4fc3551f8d33088594fb29c9a78116d36008ef057ab05da4df47a23381210a21 Makefile.PL
+SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 README
+SHA256 84f5a6b15d2bda606ec733572c3cef0a6120f84f4ccaac28f0ef8db176bfe634 examples/add_message_example.pl
+SHA256 cd5397bbe618f5bbd4e12a33b0cf5d21114e771c2dbd0ce28e2135beb52c35a8 inc/Module/Install.pm
+SHA256 8bd506c33fb78f10f6451413e931ca23541fcc4eebe05fcb7c7c9577341223c4 inc/Module/Install/AuthorRequires.pm
+SHA256 1b5430a46a35142ef8914d8c745196fca825defc9dfa7e389299bf294613825e inc/Module/Install/AuthorTests.pm
+SHA256 798836f9ccb8d204b1be31fc3835631f57e9d818b21a8f0d14bfcfb82ff4a72a inc/Module/Install/Base.pm
+SHA256 d64cd4c16f83c5baf11f64a44bea3a0abc060a49da5aba040f0eb01394bf75ab inc/Module/Install/Can.pm
+SHA256 65d7a6098bf3f829e8c1c2865476d3537aa6f0ad0ffc9149e10812c856529043 inc/Module/Install/Fetch.pm
+SHA256 70c4b77acab3ff51dfb318110369607cb109e1c319459249623b787cf3859750 inc/Module/Install/Makefile.pm
+SHA256 14556386168007ce913e669fc08a332ccdb6140246fd55a90c879b5190c1b57a inc/Module/Install/Metadata.pm
+SHA256 53825bc78e4c910b888160bc148c8bc211be58e02b99c8edcbf4854f95faa049 inc/Module/Install/ReadmeFromPod.pm
+SHA256 4c746c02c5cc19bed4c352e76205b4adff4c45ce8310d71294e1b83c059659c2 inc/Module/Install/Win32.pm
+SHA256 d3d9b4583243c470ae895defa4c44564485b53693cba1c50ab0320768f443e97 inc/Module/Install/WriteAll.pm
+SHA256 a44b7f19c685092bf2997259a416c976c1c81104f5f82a808e50d81ee941f455 t/Plack-App-Message-Board-List/01-use.t
+SHA256 796c1c0395566c12551287ed25c19eb961503483c5d4a2412bab7e778190a5c8 t/Plack-App-Message-Board-List/02-version.t
+SHA256 dba1f4100694cad82e29a084b726c90980c4faf2eb877ab9016745703628f457 t/Plack-App-Message-Board-List/03-new.t
+SHA256 e83c9b0cf3d7e7799132567e274355c27100a743690a085ad4c8ac3125f10d84 t/Plack-App-Message-Board-List/04-general.t
+SHA256 a89ddafe22e0c781108398eecdbf6b7f5e0927ef202c152de3fe25e071bfbe26 t/Plack-App-Message-Board-Message/01-use.t
+SHA256 4a1b8227173e93493925188fe17fd51b09ea506df057f78c41c9403c8297fac7 t/Plack-App-Message-Board-Message/02-version.t
+SHA256 bf775cd82d88709c0fc031a7c7fab0a07d87958c91a535c9048319572e2b7523 t/Plack-App-Message-Board-Message/03-new.t
+SHA256 8b1419e4d82be8a99e91f8e96c323d4cb8d89c73adb1487ea244d8c296ba268f t/Plack-App-Message-Board-Utils/01-use.t
+SHA256 73721be7ed3bd649caf5c727f2a5ceedbb6ebac10253b8e79e43f7e5c613db92 t/Plack-App-Message-Board-Utils/02-version.t
+SHA256 670e6cfc1f1d102f832b70a98b227cfd833e1290e3ac4e8afe48479037be9984 t/Plack-App-Message-Board-Utils/03-add_message.t
+SHA256 906019fb64922a71d24647ad21aa903c5ba31794a2c2ba09e7657ab0e69909c7 t/Plack-App-Message-Board/01-use.t
+SHA256 dd4c865b3ed7251fbad4d4adda40ebdd1fea26d51f39249c11fef32acb0d835b t/Plack-App-Message-Board/02-version.t
+SHA256 1efc311731027e6efcb337420618a86cf377b1949ecaebd6b5c81ebd9480e285 t/Plack-App-Message-Board/03-new.t
+SHA256 b6751e76c5dcc82bd7ae032d2c5e28e61a159dd60ff6f0466ca0caffc34e37bd xt/Plack-App-Message-Board-List/01-pod_coverage.t
+SHA256 a23a7e759a4273f796f6f096ffe8d563d651f91ea6752ddd81f118c9bbef2c23 xt/Plack-App-Message-Board-List/02-pod.t
+SHA256 4ff1f40f0d4016f60e685bccf37cb305888623798239dae3caec075d797406fb xt/Plack-App-Message-Board-Message/01-pod_coverage.t
+SHA256 46deb1c8ee6ca2b44c19d9164200d44400b6391bf0f0b74b6f0608a4a941e900 xt/Plack-App-Message-Board-Message/02-pod.t
+SHA256 50604e4215930773ca29983457e39b17ee199cbb4c8cf9d388a200fa448b4068 xt/Plack-App-Message-Board-Utils/01-pod_coverage.t
+SHA256 af42e0bc2f88ae56c7aea5cc2e4890a0a80ff5a7435114acf271f73394f03bc0 xt/Plack-App-Message-Board-Utils/02-pod.t
+SHA256 1b983c80e8707768b2e119de111d33a0463cf5ba31998bdaeb8beed65a4c9d09 xt/Plack-App-Message-Board/01-pod_coverage.t
+SHA256 7503508c6e04860ecb5b0288ee690917c7e3d4c5a30969bd58650b8618b430f8 xt/Plack-App-Message-Board/02-pod.t
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAEBAwAdFiEEbhzVZugfHqSVNvE7YSp92FNcjtAFAmavnScACgkQYSp92FNc
+jtAoKQv/Rlewpdt0cH0JD4QCdp6yuJAAVdKV/1edCmq4C0QODuEqWukmC8vM1hzP
+Z/V90TBDEinKOM7CmqfThVvvxBmeJMqQLUDFGIA0nARkITmeZfr745LWIH0lcRly
+JPwgfj9A+fGZ69bWD9RzUf3jnBG5Jm+2huw+lDz9yXRmAEnGmFC7dVX0RUnerywM
+2O7nS+n2eQxl/BnIrqCGKw9pjIFFnKc5Mdgb3gTJDPI53IP5TYmWxcm7QY2ZB9sp
+tHDQsHtQMxgdCGBgKMPDkx0O1HBXDKTCYKa7VubfM3bO0TRr2y8xRZ0jUlQ4ZDya
+o2RfjxnIoLTmYtiByq9DtjW7bIV3RzrkmwCqXo/R9ew2YE3uvrWNh6rYiKW63DeR
+jFlsU5By93jtohh89/LAFixm3Om8t3/wa62PAP1b1bzjpl515+Oe/zmhcNw7WNUl
+aOFUzTvaK+1r435WOKV6bJ2HiOIsN+a234Mw+fQmX4tq7XgNaBL3LGfEstdvU6qH
+vLB830Ql
+=s41Q
+-----END PGP SIGNATURE-----
