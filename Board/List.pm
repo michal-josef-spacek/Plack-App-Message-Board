@@ -115,7 +115,6 @@ sub _process_actions {
 		}
 	} else {
 		add_message(
-			$self,
 			$env,
 			'error',
 			'No callback for message board list.',

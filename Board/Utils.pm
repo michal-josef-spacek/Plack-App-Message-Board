@@ -13,7 +13,7 @@ Readonly::Array our @EXPORT_OK => qw(add_message);
 our $VERSION = 0.01;
 
 sub add_message {
-	my ($self, $env, $message_type, $message) = @_;
+	my ($env, $message_type, $message) = @_;
 
 	my $session = Plack::Session->new($env);
 	my $m = Data::Message::Simple->new(

@@ -117,7 +117,6 @@ sub _process_actions {
 			}
 		} else {
 			add_message(
-				$self,
 				$env,
 				'error',
 				'No callback for message board adding.',
@@ -134,7 +133,6 @@ sub _process_actions {
 				));
 			} else {
 				add_message(
-					$self,
 					$env,
 					'error',
 					'No callback for message board comment adding.',
@@ -142,7 +140,6 @@ sub _process_actions {
 			}
 		} else {
 			add_message(
-				$self,
 				$env,
 				'error',
 				'No comment message.',
@@ -155,7 +152,6 @@ sub _process_actions {
 	if (defined $id) {
 		if (! defined $self->message_board_cb) {
 			add_message(
-				$self,
 				$env,
 				'error',
 				'No callback for fetch message board.',
@@ -164,7 +160,6 @@ sub _process_actions {
 			my $message_board = $self->message_board_cb->($self, $id);
 			if (! defined $message_board) {
 				add_message(
-					$self,
 					$env,
 					'error',
 					'Cannot found message board.',
