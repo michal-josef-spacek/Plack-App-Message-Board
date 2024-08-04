@@ -5,7 +5,8 @@ TODO
 4. Check Plack::Session in preparation.
 5. Improve tests for List (some data, etc.)
 6. Translate texts in table in List.
-7.
+7. Listing to List page.
+8.
 
 Applied
 =======
