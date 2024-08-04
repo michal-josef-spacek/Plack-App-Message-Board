@@ -21,7 +21,9 @@ sub _cleanup {
 	my ($self, $env) = @_;
 
 	$self->{'_tags_container'}->cleanup;
-	$self->{'_tags_footer'}->cleanup;
+	if (defined $self->footer) {
+		$self->{'_tags_footer'}->cleanup;
+	}
 	$self->{'_tags_messages'}->cleanup;
 	$self->{'_tags_table'}->cleanup;
 
@@ -32,7 +34,9 @@ sub _css {
 	my ($self, $env) = @_;
 
 	$self->{'_tags_container'}->process_css;
-	$self->{'_tags_footer'}->process_css;
+	if (defined $self->footer) {
+		$self->{'_tags_footer'}->process_css;
+	}
 	$self->{'_tags_messages'}->process_css({
 		'error' => 'red',
 		'info' => 'green',
@@ -82,7 +86,9 @@ sub _prepare_app {
 		'flag_no_messages' => 0,
 	);
 	$self->{'_tags_table'} = Tags::HTML::Table::View->new(%p);
-	$self->{'_tags_footer'} = Tags::HTML::Footer->new(%p);
+	if (defined $self->footer) {
+		$self->{'_tags_footer'} = Tags::HTML::Footer->new(%p);
+	}
 
 	return;
 }
@@ -121,7 +127,9 @@ sub _process_actions {
 		);
 	}
 
-	$self->{'_tags_footer'}->init($self->footer);
+	if (defined $self->footer) {
+		$self->{'_tags_footer'}->init($self->footer);
+	}
 	$self->{'_tags_table'}->init($self->{'_table_data'}, 'No messages.');
 
 	return;
@@ -162,7 +170,9 @@ sub _tags_middle {
 		['e', 'div'],
 	);
 
-	$self->{'_tags_footer'}->process;
+	if (defined $self->footer) {
+		$self->{'_tags_footer'}->process;
+	}
 
 	return;
 }
