@@ -1,4 +1,4 @@
-0.02
+0.02 2024-08-04T18:25:33+02:00
  - Add margin to #main CSS id in List.
  - Rewrite font in List to sans-serif.
  - Update to Tags helper with margin and sans-serif font.
