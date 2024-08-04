@@ -3,7 +3,8 @@ TODO
 1. Tests.
 2. Doc.
 4. Check Plack::Session in preparation.
-5.
+5. Improve tests for List (some data, etc.)
+6.
 
 Applied
 =======
