@@ -7,7 +7,7 @@ use warnings;
 use Data::HTML::Element::A;
 use Plack::Request;
 use Plack::Session;
-use Plack::Util::Accessor qw(footer lang message_boards);
+use Plack::Util::Accessor qw(footer lang message_boards_cb);
 use Readonly;
 use Tags::HTML::Container;
 use Tags::HTML::Footer;
@@ -98,19 +98,18 @@ sub _process_actions {
 		'Message',
 		'Number of comments',
 	];
-	if (defined $self->message_boards) {
-		foreach my $mb (@{$self->message_boards}) {
-			push @{$self->{'_table_data'}}, [
-				Data::HTML::Element::A->new(
-					'data' => [$mb->id],
-					'url' => '/message?id='.$mb->id,
-				),
-				$mb->author->name,
-				$mb->date->ymd.' '.$mb->date->hms,
-				$mb->message,
-				scalar @{$mb->comments},
-			],
-		}
+	my @message_boards = $self->message_boards_cb->();
+	foreach my $mb (@message_boards) {
+		push @{$self->{'_table_data'}}, [
+			Data::HTML::Element::A->new(
+				'data' => [$mb->id],
+				'url' => '/message?id='.$mb->id,
+			),
+			$mb->author->name,
+			$mb->date->ymd.' '.$mb->date->hms,
+			$mb->message,
+			scalar @{$mb->comments},
+		],
 	}
 
 	$self->{'_tags_footer'}->init($self->footer);
