@@ -4,7 +4,7 @@ use warnings;
 use English;
 use Error::Pure::Utils qw(clean);
 use Plack::App::Message::Board::Utils qw(add_message);
-use Test::More 'tests' => 8;
+use Test::More 'tests' => 10;
 use Test::NoWarnings;
 
 # Test.
@@ -42,4 +42,30 @@ eval {
 };
 is($EVAL_ERROR, "Parameter 'text' is required.\n",
 	"Parameter 'text' is required.");
+clean();
+
+# Test.
+$env = {
+	'psgix.session' => {
+		'messages' => [],
+	},
+};
+eval {
+	add_message($env, 'error', 'x' x 5000);
+};
+is($EVAL_ERROR, "Parameter 'text' has length greater than '4096'.\n",
+	"Parameter 'text' has length greater than '4096'.");
+clean();
+
+# Test.
+$env = {
+	'psgix.session' => {
+		'messages' => [],
+	},
+};
+eval {
+	add_message($env, 'bad', 'Error');
+};
+is($EVAL_ERROR, "Parameter 'type' must be one of defined strings.\n",
+	"Parameter 'type' must be one of defined strings.");
 clean();
