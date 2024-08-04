@@ -27,6 +27,7 @@ t/Plack-App-Message-Board-List/03-new.t
 t/Plack-App-Message-Board-List/04-general.t
 t/Plack-App-Message-Board-Message/01-use.t
 t/Plack-App-Message-Board-Message/02-version.t
+t/Plack-App-Message-Board-Message/03-new.t
 t/Plack-App-Message-Board-Utils/01-use.t
 t/Plack-App-Message-Board-Utils/02-version.t
 t/Plack-App-Message-Board-Utils/03-add_message.t
