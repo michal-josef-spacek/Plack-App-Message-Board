@@ -40,7 +40,7 @@ requires:
   Readonly: 0
   Tags::HTML::Container: 0
   Tags::HTML::Footer: 0
-  Tags::HTML::Message::Board: 0
+  Tags::HTML::Message::Board: 0.04
   Tags::HTML::Message::Board::Blank: 0.02
   Tags::HTML::Messages: 0
   Tags::HTML::Table::View: 0
