@@ -23,6 +23,7 @@ META.yml
 README
 t/Plack-App-Message-Board-List/01-use.t
 t/Plack-App-Message-Board-List/02-version.t
+t/Plack-App-Message-Board-List/03-new.t
 t/Plack-App-Message-Board-Message/01-use.t
 t/Plack-App-Message-Board-Message/02-version.t
 t/Plack-App-Message-Board-Utils/01-use.t
