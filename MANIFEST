@@ -4,6 +4,7 @@ Board/Message.pm
 Board/Utils.pm
 Changes
 CONCEPT
+examples/add_message_example.pl
 inc/Module/Install.pm
 inc/Module/Install/AuthorRequires.pm
 inc/Module/Install/AuthorTests.pm
