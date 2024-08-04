@@ -5,6 +5,7 @@ use strict;
 use warnings;
 
 use Data::HTML::Element::A;
+use Plack::App::Message::Board::Utils qw(add_message);
 use Plack::Request;
 use Plack::Session;
 use Plack::Util::Accessor qw(footer lang message_boards_cb);
@@ -98,18 +99,27 @@ sub _process_actions {
 		'Message',
 		'Number of comments',
 	];
-	my @message_boards = $self->message_boards_cb->();
-	foreach my $mb (@message_boards) {
-		push @{$self->{'_table_data'}}, [
-			Data::HTML::Element::A->new(
-				'data' => [$mb->id],
-				'url' => '/message?id='.$mb->id,
-			),
-			$mb->author->name,
-			$mb->date->ymd.' '.$mb->date->hms,
-			$mb->message,
-			scalar @{$mb->comments},
-		],
+	if (defined $self->message_boards_cb) {
+		my @message_boards = $self->message_boards_cb->();
+		foreach my $mb (@message_boards) {
+			push @{$self->{'_table_data'}}, [
+				Data::HTML::Element::A->new(
+					'data' => [$mb->id],
+					'url' => '/message?id='.$mb->id,
+				),
+				$mb->author->name,
+				$mb->date->ymd.' '.$mb->date->hms,
+				$mb->message,
+				scalar @{$mb->comments},
+			],
+		}
+	} else {
+		add_message(
+			$self,
+			$env,
+			'error',
+			'No callback for message board list.',
+		);
 	}
 
 	$self->{'_tags_footer'}->init($self->footer);
