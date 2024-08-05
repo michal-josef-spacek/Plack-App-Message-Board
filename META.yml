@@ -32,7 +32,7 @@ requires:
   Data::Message::Simple: 0
   DateTime: 0
   Exporter: 0
-  Plack::App::CPAN::Changes: 0.02
+  Plack::App::CPAN::Changes: 0.03
   Plack::App::URLMap: 0
   Plack::Component: 0
   Plack::Component::Tags::HTML: 0.15
