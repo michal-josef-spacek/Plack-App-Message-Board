@@ -19,6 +19,7 @@ use Tags::HTML::Footer 0.03;
 use Tags::HTML::Messages;
 use Tags::HTML::Message::Board;
 use Tags::HTML::Message::Board::Blank;
+use Unicode::UTF8 qw(decode_utf8);
 
 our $VERSION = 0.07;
 
@@ -109,7 +110,7 @@ sub _process_actions {
 	my $action = $req->parameters->{'action'};
 	if (defined $action && $action eq 'add_message_board') {
 		if (defined $self->add_message_board_cb) {
-			my $message_board_message = $req->parameters->{'message_board_message'};
+			my $message_board_message = decode_utf8($req->parameters->{'message_board_message'});
 			$id = $self->add_message_board_cb->($self, Data::Message::Board->new(
 				'author' => $self->app_author,
 				'date' => DateTime->now,
@@ -129,7 +130,7 @@ sub _process_actions {
 			);
 		}
 	} elsif (defined $action && $action eq 'add_message_board_comment') {
-		my $message_board_comment_message = $req->parameters->{'message_board_comment_message'};
+		my $message_board_comment_message = decode_utf8($req->parameters->{'message_board_comment_message'});
 		if (defined $message_board_comment_message) {
 			if (defined $self->add_comment_cb) {
 				$self->add_comment_cb->($self, $id, Data::Message::Board::Comment->new(
