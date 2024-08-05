@@ -1,4 +1,5 @@
 0.06
+ - Fix version of Plack::App::CPAN::Changes in code.
 
 0.05 2024-08-05T10:46:44+02:00
  - Fix update of Plack::App::CPAN::Changes dependency.
