@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 use Data::HTML::Footer;
-use Plack::App::CPAN::Changes;
+use Plack::App::CPAN::Changes 0.06;
 use Plack::App::Message::Board::List;
 use Plack::App::Message::Board::Message;
 use Plack::App::URLMap;
