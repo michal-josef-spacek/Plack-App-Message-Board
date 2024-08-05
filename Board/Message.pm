@@ -21,7 +21,7 @@ use Tags::HTML::Message::Board;
 use Tags::HTML::Message::Board::Blank;
 use Unicode::UTF8 qw(decode_utf8);
 
-our $VERSION = 0.07;
+our $VERSION = 0.08;
 
 sub _cleanup {
 	my ($self, $env) = @_;
