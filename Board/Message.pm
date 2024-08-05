@@ -20,7 +20,7 @@ use Tags::HTML::Messages;
 use Tags::HTML::Message::Board;
 use Tags::HTML::Message::Board::Blank;
 
-our $VERSION = 0.03;
+our $VERSION = 0.04;
 
 sub _cleanup {
 	my ($self, $env) = @_;

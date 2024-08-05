@@ -10,7 +10,7 @@ use Readonly;
 
 Readonly::Array our @EXPORT_OK => qw(add_message);
 
-our $VERSION = 0.03;
+our $VERSION = 0.04;
 
 sub add_message {
 	my ($env, $message_type, $message) = @_;
@@ -158,6 +158,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.03
+0.04
 
 =cut
