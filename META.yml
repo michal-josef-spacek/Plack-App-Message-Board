@@ -42,7 +42,7 @@ requires:
   Plack::Util::Accessor: 0
   Readonly: 0
   Tags::HTML::Container: 0
-  Tags::HTML::Footer: 0
+  Tags::HTML::Footer: 0.03
   Tags::HTML::Message::Board: 0.05
   Tags::HTML::Message::Board::Blank: 0.05
   Tags::HTML::Messages: 0

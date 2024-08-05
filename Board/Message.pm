@@ -15,7 +15,7 @@ use Plack::Util::Accessor qw(add_comment_cb add_message_board_cb app_author foot
 	message_board_cb redirect_message_board_save);
 use Readonly;
 use Tags::HTML::Container;
-use Tags::HTML::Footer;
+use Tags::HTML::Footer 0.03;
 use Tags::HTML::Messages;
 use Tags::HTML::Message::Board;
 use Tags::HTML::Message::Board::Blank;

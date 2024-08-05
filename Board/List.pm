@@ -11,7 +11,7 @@ use Plack::Session;
 use Plack::Util::Accessor qw(footer lang message_boards_cb);
 use Readonly;
 use Tags::HTML::Container;
-use Tags::HTML::Footer;
+use Tags::HTML::Footer 0.03;
 use Tags::HTML::Messages;
 use Tags::HTML::Table::View;
 
