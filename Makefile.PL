@@ -25,6 +25,7 @@ requires 'Data::Message::Board::Comment' => 0;
 requires 'Data::Message::Simple' => 0;
 requires 'DateTime' => 0;
 requires 'Exporter' => 0;
+requires 'List::Util' => 0;
 requires 'Plack::App::CPAN::Changes' => 0.03;
 requires 'Plack::App::URLMap' => 0;
 requires 'Plack::Component' => 0;
