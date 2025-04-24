@@ -4,6 +4,7 @@ use base qw(Plack::Component);
 use strict;
 use warnings;
 
+use CPAN::Changes::Utils qw(construct_copyright_years);
 use Data::HTML::Footer;
 use List::Util qw(max min);
 use Plack::App::CPAN::Changes 0.03;
@@ -38,24 +39,16 @@ sub prepare_app {
 	my ($version, $copyright_years);
 	if (defined $self->changes) {
 		$version = ($self->changes->releases)[-1]->version;
-		my @years = map { $_->date =~ m/^(\d{4})/ms; defined $1 ? $1 : () }
-			grep { defined $_ && defined $_->date }
-			$self->changes->releases;
-		my $year_from = min(@years);
-		my $year_to = max(@years);
-		if (defined $year_from) {
-			$copyright_years = $year_from;
-			if ($year_from != $year_to) {
-				$copyright_years .= '-'.$year_to;
-			}
-		}
+		$copyright_years = construct_copyright_years($self->changes);
 	}
 
 	my $changes_url = '/changes';
 	my $footer = Data::HTML::Footer->new(
 		'author' => decode_utf8('Michal Josef Špaček'),
 		'author_url' => 'https://skim.cz',
-		'copyright_years' => $copyright_years,
+		defined $copyright_years ? (
+			'copyright_years' => $copyright_years,
+		) : (),
 		'height' => '40px',
 		defined $version ? (
 			'version' => $version,

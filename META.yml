@@ -25,6 +25,7 @@ no_index:
     - t
     - xt
 requires:
+  CPAN::Changes::Utils: 0
   Data::HTML::Element::A: 0
   Data::HTML::Footer: 0
   Data::Message::Board: 0

@@ -18,6 +18,7 @@ name 'Plack-App-Message-Board';
 perl_version 5.008;
 readme_from 'Board.pm';
 recursive_author_tests('xt');
+requires 'CPAN::Changes::Utils' => 0;
 requires 'Data::HTML::Element::A' => 0;
 requires 'Data::HTML::Footer' => 0;
 requires 'Data::Message::Board' => 0;
