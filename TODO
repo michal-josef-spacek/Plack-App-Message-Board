@@ -8,7 +8,8 @@ TODO
 7. Listing to List page.
 8. Sorting to List page.
 10. Not on CPAN
-11.
+11. Add check for lang accessor syntax + check for supported languages.
+12.
 
 Applied
 =======
