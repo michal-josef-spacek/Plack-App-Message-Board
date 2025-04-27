@@ -9,7 +9,8 @@ TODO
 10. Not on CPAN
 11. Add check for lang accessor syntax + check for supported languages.
 12. Improve translations somehow better than actual situation.
-13.
+13. Add lang parameter to URI.
+14.
 
 Applied
 =======
