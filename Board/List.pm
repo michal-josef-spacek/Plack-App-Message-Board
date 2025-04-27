@@ -14,6 +14,7 @@ use Tags::HTML::Container;
 use Tags::HTML::Footer 0.03;
 use Tags::HTML::Messages;
 use Tags::HTML::Table::View;
+use Unicode::UTF8 qw(decode_utf8);
 
 our $VERSION = 0.09;
 
@@ -62,10 +63,24 @@ sub _lang {
 
 	$self->{'_lang'} = {
 		'cze' => {
-			'version' => 'Verze',
+			'add_new_message' => decode_utf8('Přidej novou zprávu'),
+			'author' => 'Autor',
+			'date' => 'Datum',
+			'error_no_cb_meassage_board_list' => decode_utf8('Není callback pro seznam nástěnek.'),
+			'id' => 'Id',
+			'message' => decode_utf8('Zpráva'),
+			'no_message_boards' => decode_utf8('Nejsou nástěnky'),
+			'number_of_comments' => decode_utf8('Počet komentářů'),
 		},
 		'eng' => {
-			'version' => 'Version',
+			'add_new_message' => 'Add new message',
+			'author' => 'Author',
+			'date' => 'Date',
+			'error_no_cb_meassage_board_list' => 'No callback for message board list.',
+			'id' => 'Id',
+			'message' => 'Message',
+			'no_message_boards' => 'No message boards.',
+			'number_of_comments' => 'Number of comments',
 		},
 	};
 
@@ -77,6 +92,10 @@ sub _prepare_app {
 
 	# Inherite defaults.
 	$self->SUPER::_prepare_app;
+
+	if (! defined $self->lang) {
+		$self->lang('eng');
+	}
 
 	my %p = (
 		'css' => $self->css,
@@ -104,11 +123,11 @@ sub _process_actions {
 	# Process table data.
 	$self->{'_table_data'} = [];
 	push @{$self->{'_table_data'}}, [
-		'Id',
-		'Author',
-		'Date',
-		'Message',
-		'Number of comments',
+		$self->_lang('id'),
+		$self->_lang('author'),
+		$self->_lang('date'),
+		$self->_lang('message'),
+		$self->_lang('number_of_comments'),
 	];
 	if (defined $self->message_boards_cb) {
 		my @message_boards = $self->message_boards_cb->();
@@ -128,14 +147,14 @@ sub _process_actions {
 		add_message(
 			$env,
 			'error',
-			'No callback for message board list.',
+			$self->_lang('error_no_cb_meassage_board_list'),
 		);
 	}
 
 	if (defined $self->footer) {
 		$self->{'_tags_footer'}->init($self->footer);
 	}
-	$self->{'_tags_table'}->init($self->{'_table_data'}, 'No messages.');
+	$self->{'_tags_table'}->init($self->{'_table_data'}, $self->_lang('no_message_boards'));
 
 	return;
 }
@@ -166,7 +185,7 @@ sub _tags_middle {
 		['a', 'class', 'links'],
 		['b', 'a'],
 		['a', 'href', '/message'],
-		['d', 'Add new message'],
+		['d', $self->_lang('add_new_message')],
 		['e', 'a'],
 		['e', 'div'],
 	);

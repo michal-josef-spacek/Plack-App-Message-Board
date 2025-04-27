@@ -61,14 +61,60 @@ sub _lang {
 
 	$self->{'_lang'} = {
 		'cze' => {
-			'version' => 'Verze',
+			'error_no_cb_comment_adding' => decode_utf8('Není callack pro přidání komentáře.'),
+			'error_no_cb_fetch_message_board' => decode_utf8('Není callback pro získání nástěnky.'),
+			'error_no_cb_message_board_adding' => decode_utf8('Není callback pro přidání nástěnky.'),
+			'error_no_comment_message' => decode_utf8('Není komentář.'),
+			'error_no_message_board' => decode_utf8('Nástěnka nenalezena.'),
 		},
 		'eng' => {
-			'version' => 'Version',
+			'error_no_cb_comment_adding' => 'No callback for message board comment adding.',
+			'error_no_cb_fetch_message_board' => 'No callback for fetch message board.',
+			'error_no_cb_message_board_adding' => 'No callback for message board adding.',
+			'error_no_comment_message' => 'No comment message.',
+			'error_no_message_board' => 'Cannot found message board.',
 		},
 	};
 
 	return $self->{'_lang'}->{$self->lang}->{$key};
+}
+
+sub _lang_blank {
+	my $self = shift;
+
+	my $lang_hr = {
+		'cze' => {
+			'add_message_board' => decode_utf8('Přidat nástěnku'),
+			'save' => decode_utf8('Ulož'),
+		},
+		'eng' => {
+			'add_message_board' => 'Add message board',
+			'save' => 'Save',
+		},
+	};
+
+	return $lang_hr;
+}
+
+sub _lang_board {
+	my $self = shift;
+
+	my $lang_hr = {
+		'cze' => {
+			'add_comment' => decode_utf8('Přidat komentář'),
+			'author' => 'Autor',
+			'date' => 'Datum',
+			'save' => decode_utf8('Uložit'),
+		},
+		'eng' => {
+			'add_comment' => 'Add comment',
+			'author' => 'Author',
+			'date' => 'Date',
+			'save' => 'Save',
+		},
+	};
+
+	return $lang_hr;
 }
 
 sub _prepare_app {
@@ -76,6 +122,10 @@ sub _prepare_app {
 
 	# Inherite defaults.
 	$self->SUPER::_prepare_app;
+
+	if (! defined $self->lang) {
+		$self->lang('eng');
+	}
 
 	my %p = (
 		'css' => $self->css,
@@ -86,8 +136,14 @@ sub _prepare_app {
 		'padding' => '0.5em',
 		'vert_align' => 'top',
 	);
-	$self->{'_tags_message_board'} = Tags::HTML::Message::Board->new(%p);
-	$self->{'_tags_message_board_blank'} = Tags::HTML::Message::Board::Blank->new(%p);
+	$self->{'_tags_message_board'} = Tags::HTML::Message::Board->new(%p,
+		'lang' => $self->lang,
+		'text' => $self->_lang_board,
+	);
+	$self->{'_tags_message_board_blank'} = Tags::HTML::Message::Board::Blank->new(%p,
+		'lang' => $self->lang,
+		'text' => $self->_lang_blank,
+	);
 	$self->{'_tags_messages'} = Tags::HTML::Messages->new(%p,
 		'flag_no_messages' => 0,
 	);
@@ -126,7 +182,7 @@ sub _process_actions {
 			add_message(
 				$env,
 				'error',
-				'No callback for message board adding.',
+				$self->_lang('error_no_cb_message_board_adding'),
 			);
 		}
 	} elsif (defined $action && $action eq 'add_message_board_comment') {
@@ -142,14 +198,14 @@ sub _process_actions {
 				add_message(
 					$env,
 					'error',
-					'No callback for message board comment adding.',
+					$self->_lang('error_no_cb_comment_adding'),
 				);
 			}
 		} else {
 			add_message(
 				$env,
 				'error',
-				'No comment message.',
+				$self->_lang('error_no_comment_message'),
 			);
 		}
 	}
@@ -161,7 +217,7 @@ sub _process_actions {
 			add_message(
 				$env,
 				'error',
-				'No callback for fetch message board.',
+				$self->_lang('error_no_cb_fetch_message_board'),
 			);
 		} else {
 			my $message_board = $self->message_board_cb->($self, $id);
@@ -169,7 +225,7 @@ sub _process_actions {
 				add_message(
 					$env,
 					'error',
-					'Cannot found message board.',
+					$self->_lang('error_no_message_board'),
 				);
 			} else {
 				$self->{'_tags_message_board'}->init($message_board);
