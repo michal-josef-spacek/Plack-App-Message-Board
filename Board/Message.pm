@@ -22,7 +22,7 @@ use Tags::HTML::Message::Board;
 use Tags::HTML::Message::Board::Blank;
 use Unicode::UTF8 qw(decode_utf8);
 
-our $VERSION = 0.10;
+our $VERSION = 0.11;
 
 sub _cleanup {
 	my ($self, $env) = @_;

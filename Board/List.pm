@@ -17,7 +17,7 @@ use Tags::HTML::Messages;
 use Tags::HTML::Table::View;
 use Unicode::UTF8 qw(decode_utf8);
 
-our $VERSION = 0.10;
+our $VERSION = 0.11;
 
 sub _cleanup {
 	my ($self, $env) = @_;
