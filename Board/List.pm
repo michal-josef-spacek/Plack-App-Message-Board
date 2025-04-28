@@ -5,6 +5,7 @@ use strict;
 use warnings;
 
 use Data::HTML::Element::A;
+use List::Util 1.33 qw(any);
 use Plack::App::Message::Board::Utils qw(add_message);
 use Plack::Request;
 use Plack::Session;
@@ -96,6 +97,7 @@ sub _prepare_app {
 	if (! defined $self->lang) {
 		$self->lang('eng');
 	}
+	$self->{'_app_default_lang'} = $self->lang;
 
 	my %p = (
 		'css' => $self->css,
@@ -114,11 +116,25 @@ sub _prepare_app {
 		$self->{'_tags_footer'} = Tags::HTML::Footer->new(%p);
 	}
 
+	$self->{'_link'}->{'message'} = '/message';
+
 	return;
 }
 
 sub _process_actions {
 	my ($self, $env) = @_;
+
+	my $req = Plack::Request->new($env);
+
+	# Message board lang.
+	my $lang = $req->parameters->{'lang'};
+	if (defined $lang && any { $lang eq $_ } qw(cze eng)) {
+		$self->lang($lang);
+		$self->{'_link'}->{'message'} = '/message?lang='.$lang;
+	} else {
+		$self->lang($self->{'_app_default_lang'});
+		$self->{'_link'}->{'message'} = '/message';
+	}
 
 	# Process table data.
 	$self->{'_table_data'} = [];
@@ -132,10 +148,19 @@ sub _process_actions {
 	if (defined $self->message_boards_cb) {
 		my @message_boards = $self->message_boards_cb->();
 		foreach my $mb (@message_boards) {
+
+			my $url;
+			if ($self->{'_link'}->{'message'} =~ m/\?/ms) {
+				$url = $self->{'_link'}->{'message'}.'&';
+			} else {
+				$url = $self->{'_link'}->{'message'}.'?';
+			}
+			$url .= 'id='.$mb->id;
+
 			push @{$self->{'_table_data'}}, [
 				Data::HTML::Element::A->new(
 					'data' => [$mb->id],
-					'url' => '/message?id='.$mb->id,
+					'url' => $url,
 				),
 				$mb->author->name,
 				$mb->date->ymd.' '.$mb->date->hms,
@@ -184,7 +209,7 @@ sub _tags_middle {
 		['b', 'div'],
 		['a', 'class', 'links'],
 		['b', 'a'],
-		['a', 'href', '/message'],
+		['a', 'href', $self->{'_link'}->{'message'}],
 		['d', $self->_lang('add_new_message')],
 		['e', 'a'],
 		['e', 'div'],

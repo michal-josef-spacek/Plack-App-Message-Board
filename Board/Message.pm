@@ -7,6 +7,7 @@ use warnings;
 use Data::Message::Board;
 use Data::Message::Board::Comment;
 use DateTime;
+use List::Util 1.33 qw(any);
 use Plack::App::Message::Board::Utils qw(add_message);
 use Plack::Request;
 use Plack::Response;
@@ -136,6 +137,24 @@ sub _prepare_app {
 		'padding' => '0.5em',
 		'vert_align' => 'top',
 	);
+	$self->_prepare_lang;
+	$self->{'_tags_messages'} = Tags::HTML::Messages->new(%p,
+		'flag_no_messages' => 0,
+	);
+	if (defined $self->footer) {
+		$self->{'_tags_footer'} = Tags::HTML::Footer->new(%p);
+	}
+
+	return;
+}
+
+sub _prepare_lang {
+	my $self = shift;
+
+	my %p = (
+		'css' => $self->css,
+		'tags' => $self->tags,
+	);
 	$self->{'_tags_message_board'} = Tags::HTML::Message::Board->new(%p,
 		'lang' => $self->lang,
 		'text' => $self->_lang_board,
@@ -144,12 +163,6 @@ sub _prepare_app {
 		'lang' => $self->lang,
 		'text' => $self->_lang_blank,
 	);
-	$self->{'_tags_messages'} = Tags::HTML::Messages->new(%p,
-		'flag_no_messages' => 0,
-	);
-	if (defined $self->footer) {
-		$self->{'_tags_footer'} = Tags::HTML::Footer->new(%p);
-	}
 
 	return;
 }
@@ -161,6 +174,13 @@ sub _process_actions {
 
 	# Message board id.
 	my $id = $req->parameters->{'id'};
+
+	# Message board lang.
+	my $lang = $req->parameters->{'lang'};
+	if (defined $lang && any { $lang eq $_ } qw(cze eng)) {
+		$self->lang($lang);
+		$self->_prepare_lang;
+	}
 
 	# Process form.
 	my $action = $req->parameters->{'action'};

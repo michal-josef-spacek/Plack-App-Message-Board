@@ -1,4 +1,5 @@
 0.10
+ - Add lang parameter to set of language from URL.
  - Fix typo in translation.
 
 0.09 2025-04-27T19:28:26+02:00
