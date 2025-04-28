@@ -85,7 +85,7 @@ sub _lang_blank {
 	my $lang_hr = {
 		'cze' => {
 			'add_message_board' => decode_utf8('Přidat nástěnku'),
-			'save' => decode_utf8('Ulož'),
+			'save' => decode_utf8('Uložit'),
 		},
 		'eng' => {
 			'add_message_board' => 'Add message board',

@@ -1,4 +1,5 @@
 0.10
+ - Fix typo in translation.
 
 0.09 2025-04-27T19:28:26+02:00
  - Fix usage of lang accessor.
