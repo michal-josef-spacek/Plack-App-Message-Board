@@ -9,7 +9,7 @@ use List::Util 1.33 qw(any);
 use Plack::App::Message::Board::Utils qw(add_message);
 use Plack::Request;
 use Plack::Session;
-use Plack::Util::Accessor qw(footer lang message_boards_cb);
+use Plack::Util::Accessor qw(cb_message_boards footer lang);
 use Readonly;
 use Tags::HTML::Container;
 use Tags::HTML::Footer 0.03;
@@ -145,8 +145,8 @@ sub _process_actions {
 		$self->_lang('message'),
 		$self->_lang('number_of_comments'),
 	];
-	if (defined $self->message_boards_cb) {
-		my @message_boards = $self->message_boards_cb->();
+	if (defined $self->cb_message_boards) {
+		my @message_boards = $self->cb_message_boards->();
 		foreach my $mb (@message_boards) {
 
 			my $url;

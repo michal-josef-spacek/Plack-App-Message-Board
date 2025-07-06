@@ -9,7 +9,6 @@ TODO
 10. Not on CPAN
 11. Add check for lang accessor syntax + check for supported languages.
 12. Improve translations somehow better than actual situation.
-14. Rename callback accessors to cb_* prefixes.
 15.
 
 Applied
@@ -25,3 +24,6 @@ OK [20250427] skim
 
 13. Add lang parameter to URI.
 OK [20250428] skim
+
+14. Rename callback accessors to cb_* prefixes.
+OK [20250706] skim

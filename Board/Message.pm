@@ -12,8 +12,8 @@ use Plack::App::Message::Board::Utils qw(add_message);
 use Plack::Request;
 use Plack::Response;
 use Plack::Session;
-use Plack::Util::Accessor qw(add_comment_cb add_message_board_cb app_author footer lang
-	message_board_cb redirect_message_board_save);
+use Plack::Util::Accessor qw(app_author cb_add_comment cb_add_message_board cb_message_board
+	footer lang redirect_message_board_save);
 use Readonly;
 use Tags::HTML::Container;
 use Tags::HTML::Footer 0.03;
@@ -185,9 +185,9 @@ sub _process_actions {
 	# Process form.
 	my $action = $req->parameters->{'action'};
 	if (defined $action && $action eq 'add_message_board') {
-		if (defined $self->add_message_board_cb) {
+		if (defined $self->cb_add_message_board) {
 			my $message_board_message = decode_utf8($req->parameters->{'message_board_message'});
-			$id = $self->add_message_board_cb->($self, Data::Message::Board->new(
+			$id = $self->cb_add_message_board->($self, Data::Message::Board->new(
 				'author' => $self->app_author,
 				'date' => DateTime->now,
 				'message' => $message_board_message,
@@ -208,8 +208,8 @@ sub _process_actions {
 	} elsif (defined $action && $action eq 'add_message_board_comment') {
 		my $message_board_comment_message = decode_utf8($req->parameters->{'message_board_comment_message'});
 		if (defined $message_board_comment_message) {
-			if (defined $self->add_comment_cb) {
-				$self->add_comment_cb->($self, $id, Data::Message::Board::Comment->new(
+			if (defined $self->cb_add_comment) {
+				$self->cb_add_comment->($self, $id, Data::Message::Board::Comment->new(
 					'author' => $self->app_author,
 					'date' => DateTime->now,
 					'message' => $message_board_comment_message,
@@ -233,14 +233,14 @@ sub _process_actions {
 	# Fetch mesaage board.
 	$self->{'_blank'} = 1;
 	if (defined $id) {
-		if (! defined $self->message_board_cb) {
+		if (! defined $self->cb_message_board) {
 			add_message(
 				$env,
 				'error',
 				$self->_lang('error_no_cb_fetch_message_board'),
 			);
 		} else {
-			my $message_board = $self->message_board_cb->($self, $id);
+			my $message_board = $self->cb_message_board->($self, $id);
 			if (! defined $message_board) {
 				add_message(
 					$env,

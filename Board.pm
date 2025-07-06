@@ -12,8 +12,8 @@ use Plack::App::Message::Board::List;
 use Plack::App::Message::Board::Message;
 use Plack::App::URLMap;
 use Plack::Session;
-use Plack::Util::Accessor qw(add_comment_cb add_message_board_cb app_author changes css images
-	lang message_board_cb message_boards_cb redirect_message_board_save tags);
+use Plack::Util::Accessor qw(cb_add_comment cb_add_message_board app_author changes css images
+	lang cb_message_board cb_message_boards redirect_message_board_save tags);
 use Unicode::UTF8 qw(decode_utf8);
 
 our $VERSION = 0.11;
@@ -64,14 +64,14 @@ sub prepare_app {
 
 	my $app_list = Plack::App::Message::Board::List->new(
 		%common_params,
-		'message_boards_cb' => $self->message_boards_cb,
+		'cb_message_boards' => $self->cb_message_boards,
 	)->to_app;
 	my $app_message = Plack::App::Message::Board::Message->new(
 		%common_params,
-		'add_comment_cb' => $self->add_comment_cb,
-		'add_message_board_cb' => $self->add_message_board_cb,
+		'cb_add_comment' => $self->cb_add_comment,
+		'cb_add_message_board' => $self->cb_add_message_board,
 		'app_author' => $self->app_author,
-		'message_board_cb' => $self->message_board_cb,
+		'cb_message_board' => $self->cb_message_board,
 		'redirect_message_board_save' => $self->redirect_message_board_save,
 	)->to_app;
 	my $app_changes;
