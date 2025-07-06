@@ -16,7 +16,7 @@ use Plack::Util::Accessor qw(cb_add_comment cb_add_message_board app_author chan
 	lang cb_message_board cb_message_boards redirect_message_board_save tags);
 use Unicode::UTF8 qw(decode_utf8);
 
-our $VERSION = 0.11;
+our $VERSION = 0.12;
 
 sub call {
 	my ($self, $env) = @_;
