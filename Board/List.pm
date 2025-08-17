@@ -146,7 +146,7 @@ sub _process_actions {
 		$self->_lang('number_of_comments'),
 	];
 	if (defined $self->cb_message_boards) {
-		my @message_boards = $self->cb_message_boards->();
+		my @message_boards = $self->cb_message_boards->($self);
 		foreach my $mb (@message_boards) {
 
 			my $url;
