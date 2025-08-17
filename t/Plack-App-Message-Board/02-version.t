@@ -6,4 +6,4 @@ use Test::More 'tests' => 2;
 use Test::NoWarnings;
 
 # Test.
-is($Plack::App::Message::Board::VERSION, 0.12, 'Version.');
+is($Plack::App::Message::Board::VERSION, 0.13, 'Version.');
